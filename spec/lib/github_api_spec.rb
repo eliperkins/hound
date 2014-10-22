@@ -265,36 +265,36 @@ describe GithubApi do
       expect(files.first.filename).to eq "config/unicorn.rb"
     end
   end
+end
 
-  describe "#add_comment" do
-    it "adds comment to GitHub" do
-      api = GithubApi.new
-      repo_name = "test/repo"
-      pull_request_number = 2
-      comment = "test comment"
-      commit_sha = "commitsha"
-      file = "test.rb"
-      patch_position = 123
-      commit = double(:commit, repo_name: repo_name, sha: commit_sha)
-      request = stub_comment_request(
-        repo_name,
-        pull_request_number,
-        comment,
-        commit_sha,
-        file,
-        patch_position
-      )
+describe GithubApi, "#add_pull_request_comment" do
+  it "adds comment to GitHub" do
+    api = GithubApi.new("authtoken")
+    repo_name = "test/repo"
+    pull_request_number = 2
+    comment = "test comment"
+    commit_sha = "commitsha"
+    file = "test.rb"
+    patch_position = 123
+    commit = double(:commit, repo_name: repo_name, sha: commit_sha)
+    request = stub_comment_request(
+      repo_name,
+      pull_request_number,
+      comment,
+      commit_sha,
+      file,
+      patch_position
+    )
 
-      api.add_comment(
-        pull_request_number: pull_request_number,
-        commit: commit,
-        comment: "test comment",
-        filename: file,
-        patch_position: patch_position
-      )
+    api.add_pull_request_comment(
+      pull_request_number: pull_request_number,
+      commit: commit,
+      comment: "test comment",
+      filename: file,
+      patch_position: patch_position
+    )
 
-      expect(request).to have_been_requested
-    end
+    expect(request).to have_been_requested
   end
 
   describe "#pull_request_comments" do
