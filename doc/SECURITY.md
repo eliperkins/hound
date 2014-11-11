@@ -46,7 +46,9 @@ authenticate your GitHub account using [GitHub's OAuth2 flow][gh-oauth].
 Using OAuth2 means we do not access your GitHub password
 and that you can revoke our access at any time.
 
-We store your GitHub token in your web browser's session cookie.
+We store your GitHub token in your web browser's session cookie during the
+"Refreshing Repos..." phase. We do not use the token during repo activation.
+
 We do not store this GitHub token in our PostgreSQL database.
 
 We need this token in order to refresh your GitHub repositories with Hound,
