@@ -29,6 +29,10 @@ class RepoConfig
     end
   end
 
+  def hound_config_for(style_guide_name)
+    hound_config[style_guide_name] || {}
+  end
+
   private
 
   def enabled_in_config?(name)
