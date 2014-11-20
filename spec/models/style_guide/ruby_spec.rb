@@ -133,20 +133,20 @@ end
       end
     end
 
-    describe "when using inject" do
+    describe "when using reduce" do
       it "returns no violations" do
         expect(violations_in(<<-CODE)).to eq []
-          users.inject(0) do |sum, user|
+          users.reduce(0) do |sum, user|
             sum + user.age
           end
         CODE
       end
     end
 
-    describe "when using reduce" do
+    describe "when using inject" do
       it "returns violations" do
         expect(violations_in(<<-CODE)).not_to be_empty
-users.reduce(0) do |result, user|
+users.inject(0) do |result, user|
   user.age
 end
         CODE
